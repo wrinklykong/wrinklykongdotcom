@@ -2,7 +2,10 @@
     text-align: center;
 }
 
-.TopBar {
-    text-align: center;
-    background-color: blue;
+.WrinklyNavBar {
+    offset: 50px;
+}
+
+.BrandBar {
+    display: inline;
 }

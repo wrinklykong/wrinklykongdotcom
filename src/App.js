@@ -1,16 +1,18 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import Main from "./view/pages/Main"
+import MainPage from "./view/pages/Main"
 import NotFoundPage from "./view/pages/404";
 import ProjectPage from "./view/pages/Projects";
-import TopBar from "./components/topBar";
+import WrinklyNavBar from "./components/wrinklyNavBar";
+import AboutPage from "./view/pages/About";
 
 function App() {
   return (
     <BrowserRouter>
-      <TopBar/>
+      <WrinklyNavBar/>
       <Routes>
-        <Route path="/" element={<Main/>} />
+        <Route path="/" element={<MainPage/>} />
         <Route path="/projects" element={<ProjectPage/>} />
+        <Route path="/about" element={<AboutPage/>} />
         <Route path="*" element={<NotFoundPage/>} />
       </Routes>
     </BrowserRouter>
