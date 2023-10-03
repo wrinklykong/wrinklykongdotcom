@@ -4,8 +4,10 @@
 
 .WrinklyNavBar {
     offset: 50px;
+    text-align: center;
+    background-color: whitesmoke;
 }
 
 .BrandBar {
-    display: inline;
+    text-decoration-color: blue;
 }

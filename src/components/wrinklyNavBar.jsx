@@ -4,10 +4,10 @@ import wrinkly from "../view/images/wrinkly_image.webp"
 
 const WrinklyNavBar = () => {
     return (
-        <div className="d-inline align-bottom">
-            <div className="d-inline align-bottom">
-                <img src={wrinkly} style={{height:'4%', width:'4%'}}></img>
-                <a><b>  WrinklyKong</b></a>
+        <div className="WrinklyNavBar">
+            <div className="BrandBar">
+                <img src={wrinkly} style={{height:'2%', width:'2%'}} alt="WKLogo"></img>
+                <p><b>  WrinklyKong</b></p>
             </div>
             <Link to={"/"}>
                 <Button >Blog</Button>
