@@ -6,8 +6,10 @@ const WrinklyNavBar = () => {
     return (
         <div className="WrinklyNavBar">
             <div className="BrandBar">
-                <img src={wrinkly} style={{height:'2%', width:'2%'}} alt="WKLogo"></img>
-                <p><b>  WrinklyKong</b></p>
+                <p>
+                    <img src={wrinkly} style={{height:'2%', width:'2%'}} alt="WKLogo"></img>
+                    <b>WrinklyKong</b>
+                </p>
             </div>
             <Link to={"/"}>
                 <Button >Blog</Button>

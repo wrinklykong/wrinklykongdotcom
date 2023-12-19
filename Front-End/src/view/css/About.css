@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.block {
+    position: relative;
+    text-align: center;
+    width: 45%;
+    margin: auto;
+    outline-style: groove;
+}
+
+#johnphoto {
+    width:25%;
+    height:25%
+}
+
+.paragraph {
+    display: inline-flex;
+}
