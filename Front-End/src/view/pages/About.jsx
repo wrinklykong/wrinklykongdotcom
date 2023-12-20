@@ -3,7 +3,7 @@ import JohnPhoto from "../images/profpic.jpg"
 
 const AboutPage =() => {
     return(
-        <p>
+        <div>
             <h1>
                 About 
             </h1>
@@ -22,7 +22,7 @@ const AboutPage =() => {
                     </p>
                 </div>
             </div>
-        </p>
+        </div>
     );
 }
 
