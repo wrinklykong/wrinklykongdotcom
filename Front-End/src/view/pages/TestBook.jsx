@@ -1,5 +1,12 @@
+import Book from "../../components/Book"
+
 const TestBookPage = () => {
     return (
-        <a>TEst test</a>
-    )
+        <div>
+            <br/>
+            <Book/>
+        </div>
+    );
 }
+
+export default TestBookPage;
