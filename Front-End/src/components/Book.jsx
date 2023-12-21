@@ -1,7 +1,21 @@
-import React, { useCallback } from 'react'
-import HTMLFlipBook from 'react-pageflip'
-import "./Book.css"
+import React, { useCallback, useState } from 'react'
 
+import HTMLFlipBook from 'react-pageflip'
+
+import { Document, pdfjs, Page as ReactPdfPage } from 'react-pdf'
+import 'react-pdf/dist/Page/TextLayer.css'
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+
+import "./Book.css"
+import pdfFile from "../documents/test2.pdf"
+
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.js',
+    import.meta.url,
+).toString();
+
+/*
 const PageCover = React.forwardRef((props, ref) => {
     return (
         <div className='Cover' ref={ref}>
@@ -11,13 +25,15 @@ const PageCover = React.forwardRef((props, ref) => {
         </div>
     );
 });
+*/
 
-const Page = React.forwardRef((props, ref) => {
+const width = 425;
+const height = 550;
+
+const Page = React.forwardRef(({pageNumber}, ref) => {
     return (
-        <div className="page" ref={ref}>
-            <h1>Page header</h1>
-            <h2>{props.children}</h2>
-            <h3>{props.number}</h3>
+        <div ref={ref}>
+            <ReactPdfPage pageNumber={pageNumber} width={width} height={height}/>
         </div>
     );
 });
@@ -30,24 +46,21 @@ function Book() {
 
     return (
         <div className='FlipBook'>
-            <HTMLFlipBook
-                width={300} height={500}
-                onFlip={onFlip}
-                showCover={true}
-                >
-                <PageCover>try</PageCover>
-
-                <Page number="1">
-                    <p>help</p>
-                </Page>
-                <Page number="2">
-                    <p>help</p>
-                </Page>
-                <Page number="3">
-                    <p>help</p>
-                </Page>
-                
-            </HTMLFlipBook>
+            <Document file={pdfFile}>
+                <HTMLFlipBook
+                    width={width} height={height}
+                    onFlip={onFlip}
+                    showCover={true}
+                    drawShadow={false}
+                    >
+                    
+                    <Page pageNumber={1}/>
+                    <Page pageNumber={2}/>
+                    <Page pageNumber={3}/>
+                    <Page pageNumber={4}/>
+                    <Page pageNumber={5}/>
+                </HTMLFlipBook>
+            </Document>
         </div>
     )
 }
