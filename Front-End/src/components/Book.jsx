@@ -39,7 +39,7 @@ const Page = React.forwardRef(({pageNumber}, ref) => {
 });
 
 function Book() {
-    
+
     const onFlip = useCallback((e) => {
         console.log("Current page: "+ e.data);
     }, []);
