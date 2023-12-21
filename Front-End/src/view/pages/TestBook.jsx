@@ -1,8 +1,5 @@
 import Book from "../../components/Book"
 import { useParams } from "react-router-dom";
-/*
-test
-*/
 
 const TestBookPage = () => {
 
