@@ -7,7 +7,7 @@ import 'react-pdf/dist/Page/TextLayer.css'
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 import "./Book.css"
-import pdfFile from "../documents/test2.pdf"
+import pdfFile from "../documents/test.pdf"
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -40,25 +40,33 @@ const Page = React.forwardRef(({pageNumber}, ref) => {
 
 function Book() {
 
+    const [numPages, setNumPages] = useState();
+
+    /*
     const onFlip = useCallback((e) => {
         console.log("Current page: "+ e.data);
     }, []);
+    */
+
+    function onDocumentLoadSuccess({numPages}) {
+        setNumPages(numPages)
+    }
 
     return (
         <div className='FlipBook'>
-            <Document file={pdfFile}>
+            <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
                 <HTMLFlipBook
                     width={width} height={height}
-                    onFlip={onFlip}
                     showCover={true}
                     drawShadow={false}
                     >
-                    
-                    <Page pageNumber={1}/>
-                    <Page pageNumber={2}/>
-                    <Page pageNumber={3}/>
-                    <Page pageNumber={4}/>
-                    <Page pageNumber={5}/>
+                    {Array.from(new Array(numPages), (e1, index) => (
+                        <Page
+                            key={`page_${index+1}`} 
+                            pageNumber={index + 1} 
+                            width={width}
+                            height={height}/>
+                    ))}
                 </HTMLFlipBook>
             </Document>
         </div>
