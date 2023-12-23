@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4000
 // Connect to database
 
 mongoose
-    .connect(process.env.MONG_URI, { useNewUrlParser: true })
+    .connect(process.env.MONG_URI, { dbName: "WKWebsite", useNewUrlParser: true })
     .then((r) => console.log('MongoDB connected!'))
     .catch((error) => console.log(error))
 
@@ -22,7 +22,7 @@ app.use(express.json())
 
 // add routes
 
-app.use("/api/Books", require("../routes/Books"));
+app.use("/api/Books", require("./routes/Books"));
 
 app.use((err, req, res, next) => {
     console.log(err);

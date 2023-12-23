@@ -6,7 +6,11 @@ const bookList = Schema({
     desc: {
         type: String,
         required: true
+    },
+    fileLink: {
+        type: String,
+        required: true
     }
-});
+})
 
-module.exports = model('books', bookList)
+module.exports = model('Book', bookList)
