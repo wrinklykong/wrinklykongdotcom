@@ -11,7 +11,7 @@ const TestBookPage = () => {
                 {params.bookId}
             </p>
             <br/>
-            <Book/>
+            <Book id={params.bookId}/>
         </div>
     );
 }

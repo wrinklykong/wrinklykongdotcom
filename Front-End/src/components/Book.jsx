@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect, useRef } from 'react'
 
 import HTMLFlipBook from 'react-pageflip'
 
@@ -8,6 +8,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 import "./Book.css"
 import pdfFile from "../documents/test.pdf"
+import { getAllProducts } from '../services/bookServices';
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -38,9 +39,21 @@ const Page = React.forwardRef(({pageNumber}, ref) => {
     );
 });
 
-function Book() {
+async function getItems() {
+    const resp = await getAllProducts()
+    console.log(resp)
+}
+
+function Book( props ) {
+
+    /*
+    props:
+        id: id of the thingy
+    */
 
     const [numPages, setNumPages] = useState();
+
+    const wasCalled = useRef(false)
 
     /*
     const onFlip = useCallback((e) => {
@@ -48,8 +61,16 @@ function Book() {
     }, []);
     */
 
+    useEffect(() => {
+        if(wasCalled.current) return;
+        wasCalled.current = true;
+        console.log("hello")
+        getItems()
+    }, []);
+
     function onDocumentLoadSuccess({numPages}) {
         setNumPages(numPages)
+        console.log(`hello: ${props.id}`)
     }
 
     return (
