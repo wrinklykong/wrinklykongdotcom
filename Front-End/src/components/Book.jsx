@@ -8,7 +8,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 import "./Book.css"
 import pdfFile from "../documents/test.pdf"
-import { getAllProducts } from '../services/bookServices';
+import { getAllProducts, getProductByBookId } from '../services/bookServices';
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -40,8 +40,14 @@ const Page = React.forwardRef(({pageNumber}, ref) => {
 });
 
 async function getItems() {
-    const resp = await getAllProducts()
+    const resp = await getProductByBookId(1)
     console.log(resp)
+}
+
+async function getBook(id) {
+    const resp = await getProductByBookId(id)
+    console.log(resp)
+    return resp
 }
 
 function Book( props ) {
@@ -52,6 +58,7 @@ function Book( props ) {
     */
 
     const [numPages, setNumPages] = useState();
+    const [book, setBook] = useState();
 
     const wasCalled = useRef(false)
 
@@ -64,34 +71,32 @@ function Book( props ) {
     useEffect(() => {
         if(wasCalled.current) return;
         wasCalled.current = true;
-        console.log("hello")
-        getItems()
+        setBook(getBook(1));
+        return (
+            <div className='FlipBook'>
+                <Document file={book.data.file_link} onLoadSuccess={onDocumentLoadSuccess}>
+                    <HTMLFlipBook
+                        width={width} height={height}
+                        showCover={true}
+                        drawShadow={false}
+                        >
+                        {Array.from(new Array(numPages), (e1, index) => (
+                            <Page
+                                key={`page_${index+1}`} 
+                                pageNumber={index + 1} 
+                                width={width}
+                                height={height}/>
+                        ))}
+                    </HTMLFlipBook>
+                </Document>
+            </div>
+        )
     }, []);
 
     function onDocumentLoadSuccess({numPages}) {
         setNumPages(numPages)
         console.log(`hello: ${props.id}`)
     }
-
-    return (
-        <div className='FlipBook'>
-            <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
-                <HTMLFlipBook
-                    width={width} height={height}
-                    showCover={true}
-                    drawShadow={false}
-                    >
-                    {Array.from(new Array(numPages), (e1, index) => (
-                        <Page
-                            key={`page_${index+1}`} 
-                            pageNumber={index + 1} 
-                            width={width}
-                            height={height}/>
-                    ))}
-                </HTMLFlipBook>
-            </Document>
-        </div>
-    )
 }
 
 export default Book;
