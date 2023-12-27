@@ -51,27 +51,45 @@ async function getBook(id) {
 }
 
 function Book( props ) {
-
+    
     /*
     props:
-        id: id of the thingy
+    id: id of the thingy
     */
-
-    const [numPages, setNumPages] = useState();
-    const [book, setBook] = useState();
-
+   
+   const [numPages, setNumPages] = useState();
+   const [book, setBook] = useState();
     const wasCalled = useRef(false)
+    const isLoading = useRef(true)
 
     /*
     const onFlip = useCallback((e) => {
         console.log("Current page: "+ e.data);
     }, []);
     */
+    async function grabBook() {
+        let a = await getBook(1);
+        setBook(a)
+        isLoading.current = false
+        console.log("loaded!")
+    }
 
     useEffect(() => {
         if(wasCalled.current) return;
         wasCalled.current = true;
-        setBook(getBook(1));
+        grabBook()
+    }, []);
+
+    function onDocumentLoadSuccess({numPages}) {
+        setNumPages(numPages)
+    }
+
+    if (isLoading.current) {
+        return (
+            <div>Loading...</div>
+        )
+    }
+    else {
         return (
             <div className='FlipBook'>
                 <Document file={book.data.file_link} onLoadSuccess={onDocumentLoadSuccess}>
@@ -91,11 +109,6 @@ function Book( props ) {
                 </Document>
             </div>
         )
-    }, []);
-
-    function onDocumentLoadSuccess({numPages}) {
-        setNumPages(numPages)
-        console.log(`hello: ${props.id}`)
     }
 }
 
