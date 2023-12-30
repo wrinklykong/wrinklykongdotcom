@@ -1,9 +1,10 @@
 import "../css/Beer.css"
 
 import { useRef, useEffect, useState } from "react";
-import PostCard from "../../components/Post"
 import { getRecentPosts, getPostsPage } from "../../services/beerServices";
 import { Button } from "react-bootstrap";
+
+import PostCard from "../../components/Post"
 
 function BeerPage ( props ) {
 
@@ -24,14 +25,6 @@ function BeerPage ( props ) {
         const response = await getRecentPosts()
         isLoading.current = false;
         setPosts(response)
-    }
-
-    async function getPage( page ) {
-        isLoading.current = true;
-        setPostNum(page);
-        const response = await getPostsPage(page);
-        isLoading.current = false;
-        setPosts(response);
     }
 
     async function getNextResults () {

@@ -7,7 +7,9 @@ function PostCard ({ obj, id, title, imgLink, text, date }) {
         <div>
             <Card className="PostCard" style={{ width: '20rem' }}>
                 <Card.Body>
-                    <Card.Title>{title}</Card.Title>
+                    <Card.Title>
+                        <Link to={`wrinklykong.com/Beer/${id}`}>{title}</Link>
+                    </Card.Title>
                     <Card.Img src={imgLink}></Card.Img>
                     <Card.Text>{text}</Card.Text>
                     <Card.Footer>{date}</Card.Footer>
