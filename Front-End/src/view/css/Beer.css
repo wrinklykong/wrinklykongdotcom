@@ -1,0 +1,12 @@
+.BeerFrontPage {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    outline-style: groove;
+}
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
