@@ -17,3 +17,8 @@ export const getPostsFromQuery = async (jsonQuery) => {
 export const getRecentPosts = async () => {
     return getRequest(`http://localhost:4000/api/Beer/recent`)
 }
+
+export const getPostsPage = async (page) => {
+    console.log(page);
+    return getRequest(`http://localhost:4000/api/Beer/recent/${page}`)
+}

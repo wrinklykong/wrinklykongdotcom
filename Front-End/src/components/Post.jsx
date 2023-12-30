@@ -1,7 +1,7 @@
 import { Card } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 
-function PostCard ({ obj, id, title, imgLink, text }) {
+function PostCard ({ obj, id, title, imgLink, text, date }) {
 
     return(
         <div>
@@ -10,6 +10,7 @@ function PostCard ({ obj, id, title, imgLink, text }) {
                     <Card.Title>{title}</Card.Title>
                     <Card.Img src={imgLink}></Card.Img>
                     <Card.Text>{text}</Card.Text>
+                    <Card.Footer>{date}</Card.Footer>
                 </Card.Body>
             </Card>
         </div>

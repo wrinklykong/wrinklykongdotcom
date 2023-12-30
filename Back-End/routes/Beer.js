@@ -2,6 +2,8 @@ const express = require("express")
 const expressRouter = express.Router()
 const beer = require("../model/beer")
 
+// ToDo: sanitation so it doesnt crash the server
+
 // Get all
 expressRouter.get('/', async (req, res) => {
     const beers = await beer.find()
@@ -26,7 +28,18 @@ expressRouter.get('/id/:id', async (req, res) => {
 
 // Get first 10 posts
 expressRouter.get('/recent', async (req, res) => {
-    const beerRes = await beer.find().sort({_id: -1}).limit(10);
+    const beerRes = await beer.find().sort({_id: -1}).limit(5);
+    try {
+        return res.status(200).json(beerRes)
+    } catch (error) {
+        return res.status(500).send(error)
+    }
+})
+
+// Get N*10 posts
+expressRouter.get('/recent/:num', async (req, res) => {
+    const { num } = req.params
+    const beerRes = await beer.find().sort({_id: -1}).skip( num * 5 ).limit(5);
     try {
         return res.status(200).json(beerRes)
     } catch (error) {
