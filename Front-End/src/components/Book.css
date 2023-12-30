@@ -1,0 +1,8 @@
+.FlipBook {
+    box-shadow: 10px 10px 10px 10px;
+    border-radius: 3px;
+    width: 850px;
+    height: 550px;
+    margin:auto;
+    background-color: gray;
+}

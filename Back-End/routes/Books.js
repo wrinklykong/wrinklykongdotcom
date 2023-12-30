@@ -16,7 +16,7 @@ expressRouter.get('/', async (req, res) => {
 expressRouter.get('/:id', async (req, res) => {
     const { id } = req.params
     console.log(id)
-    const singleBook = await book.findById(id)
+    const singleBook = await book.findOne({"bookId": parseInt(id)})
     try {
         return res.status(200).json(singleBook)
     } catch (error) {
