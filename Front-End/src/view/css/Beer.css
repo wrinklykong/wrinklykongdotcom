@@ -1,0 +1,24 @@
+.BeerFrontPage {
+    position: relative;
+    margin: auto;
+    display: block;
+}
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+.navButton {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.buttonFooter {
+    margin: auto;
+    width: 15%;
+    display: flex;
+}

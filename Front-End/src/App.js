@@ -4,6 +4,7 @@ import NotFoundPage from "./view/pages/404";
 import ProjectPage from "./view/pages/Projects";
 import WrinklyNavBar from "./components/wrinklyNavBar";
 import AboutPage from "./view/pages/About";
+import BeerPage from "./view/pages/Beer";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<MainPage/>} />
         <Route path="/projects" element={<ProjectPage/>} />
         <Route path="/about" element={<AboutPage/>} />
+        <Route path="/beer" element={<BeerPage/>} />
         <Route path="*" element={<NotFoundPage/>} />
       </Routes>
     </BrowserRouter>

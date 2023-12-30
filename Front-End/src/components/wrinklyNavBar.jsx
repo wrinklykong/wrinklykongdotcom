@@ -11,8 +11,8 @@ const WrinklyNavBar = () => {
                     <b>WrinklyKong</b>
                 </p>
             </div>
-            <Link to={"/"}>
-                <Button >Blog</Button>
+            <Link to={"/Beer"}>
+                <Button >Beer</Button>
             </Link>
             <Link to={"/Projects"}>
                 <Button>Projects</Button>
