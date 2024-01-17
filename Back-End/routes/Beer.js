@@ -15,11 +15,10 @@ expressRouter.get('/', async (req, res) => {
 })
 
 // Get specific item by ID
-expressRouter.get('/id/:id', async (req, res) => {
-    const { id } = req.params
-    console.log(id)
-    const singleBeer = await beer.findById(id)
+expressRouter.get('/id/:link', async (req, res) => {
     try {
+        const singleBeer = await beer.find(JSON.parse('{"link": "'+req.params.link+'"}'));
+        console.log(singleBeer)
         return res.status(200).json(singleBeer)
     } catch (error) {
         return res.status(500).send(error)

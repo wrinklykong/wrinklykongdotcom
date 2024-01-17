@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 
 import PostCard from "../../components/Post"
 
-function BeerPage ( props ) {
+function BeerDirectoryPage ( ) {
 
     const [posts, setPosts] = useState();
     const [postNum, setPostNum] = useState();
@@ -89,7 +89,6 @@ function BeerPage ( props ) {
         )
     }
     else {
-        console.log(posts.data)
         return(
             <div className="BeerFrontPage">
                 {Array.from(new Array(posts.data.length), (e1, index) => (
@@ -116,4 +115,4 @@ function BeerPage ( props ) {
     }
 }
 
-export default BeerPage;
+export default BeerDirectoryPage;
