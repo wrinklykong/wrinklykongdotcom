@@ -23,6 +23,7 @@ app.use(express.json())
 // add routes
 
 app.use("/api/Books", require("./routes/Books"));
+app.use("/api/Beer", require("./routes/Beer"));
 
 app.use((err, req, res, next) => {
     console.log(err);
