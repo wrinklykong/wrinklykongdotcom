@@ -13,6 +13,7 @@ function BeerPage ( props ) {
 
     const wasCalled = useRef(false);
     const isLoading = useRef(true);
+    const failedRequest = useRef(false);
 
 
     function init() {
@@ -20,29 +21,50 @@ function BeerPage ( props ) {
     }
 
     async function grabRecentPosts() {
+        failedRequest.current = false;
         isLoading.current = true;
-        setPostNum(0);
-        const response = await getRecentPosts()
+        const response = await getRecentPosts();
+        if ( response != null ) {
+            setPostNum(0);
+        }
+        else {
+            failedRequest.current = true;
+            setPosts(null);
+        }
+        setPosts(response);
         isLoading.current = false;
-        setPosts(response)
     }
 
     async function getNextResults () {
-        console.log("next results")
+        failedRequest.current = false;
         isLoading.current = true;
         const response = await getPostsPage(postNum+1);
-        setPostNum( postNum+1 );
-        isLoading.current = false;
-        setPosts(response);
+        if ( response != null ) {
+            isLoading.current = false;
+            setPosts(response);
+            setPostNum( postNum+1 );
+        }
+        else {
+            isLoading.current = false;
+            failedRequest.current = true;
+            setPosts(null);
+        }
     }
 
     async function getPrevResults () {
-        console.log("prev results")
+        failedRequest.current = false;
         isLoading.current = true;
         const response = await getPostsPage(postNum-1);
-        setPostNum( postNum-1 );
-        isLoading.current = false;
-        setPosts(response);
+        if ( response != null ) {
+            isLoading.current = false;
+            setPosts(response);
+            setPostNum( postNum-1 );
+        }
+        else {
+            isLoading.current = false;
+            failedRequest.current = true;
+            setPosts(null);
+        }
     }
 
     // Page functionality
@@ -58,6 +80,12 @@ function BeerPage ( props ) {
         console.log("loading...")
         return (
             <a>Loading ...</a>
+        )
+    }
+    else if (isLoading.current !== true && failedRequest.current) {
+        // TODO: Update with a placeholder not found result
+        return(
+            <p>Failed to connect to server!</p>
         )
     }
     else {
@@ -78,7 +106,7 @@ function BeerPage ( props ) {
                             onClick={getPrevResults} 
                             style={{display: "block"}}
                             >Prev</Button>: null}
-                    { posts.data.length == 5 ?<Button className="navButton" 
+                    { posts.data.length === 5 ?<Button className="navButton" 
                             onClick={getNextResults} 
                             style={{display: "block"}}
                             >Next</Button>: null}

@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function PostCard ({ obj, id, title, imgLink, text, date }) {
 
